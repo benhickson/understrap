@@ -138,7 +138,7 @@ if ( ! class_exists( 'Understrap_WP_Bootstrap_Navwalker' ) ) {
 
 			// Add .dropdown or .active classes where they are needed.
 			if ( isset( $args->has_children ) && $args->has_children ) {
-				$classes[] = 'dropdown';
+				$classes[] = 'fixed-bottom' !== get_theme_mod( 'understrap_navbar_position' ) ? 'dropdown' : 'dropup';
 			}
 			if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) ) {
 				$classes[] = 'active';

@@ -31,5 +31,11 @@ if ( ! function_exists( 'understrap_setup_theme_default_settings' ) ) {
 		if ( '' == $understrap_container_type ) {
 			set_theme_mod( 'understrap_container_type', 'container' );
 		}
+
+		// Primary navbar placement.
+		$understrap_navbar_position = get_theme_mod( 'understrap_navbar_position' );
+		if ( '' == $understrap_navbar_position ) {
+			set_theme_mod( 'understrap_navbar_position', 'default' );
+		}
 	}
 }

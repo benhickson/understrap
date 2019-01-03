@@ -130,6 +130,31 @@ if ( ! function_exists( 'understrap_theme_customize_register' ) ) {
 				)
 			)
 		);
+
+		$wp_customize->add_setting(
+			'understrap_navbar_position',
+			array(
+				'capability'        => 'edit_theme_options',
+				'sanitize_callback' => 'understrap_theme_slug_sanitize_select',
+				'default'           => 'default',
+			)
+		);
+
+		$wp_customize->add_control(
+			'understrap_navbar_position',
+			array(
+				'type'        => 'select',
+				'section'     => 'understrap_theme_layout_options',
+				'label'       => __( 'Navbar Placement', 'understrap' ),
+				'description' => __( 'Set placement of the navbar.', 'understrap' ),
+				'choices'     => array(
+					'default'      => __( 'Default', 'understrap' ),
+					'fixed-top'    => __( 'Fixed to the top', 'understrap' ),
+					'fixed-bottom' => __( 'Fixed to the bottom', 'understrap' ),
+					//'sticky-top'   => __( 'Stickied to the top', 'understrap' ),
+				),
+			)
+		);
 	}
 } // endif function_exists( 'understrap_theme_customize_register' ).
 add_action( 'customize_register', 'understrap_theme_customize_register' );

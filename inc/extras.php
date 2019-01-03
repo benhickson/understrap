@@ -35,7 +35,6 @@ if ( ! function_exists( 'understrap_body_classes' ) ) {
 	}
 }
 
-// Removes tag class from the body_class array to avoid Bootstrap markup styling issues.
 add_filter( 'body_class', 'understrap_adjust_body_class' );
 
 if ( ! function_exists( 'understrap_adjust_body_class' ) ) {
@@ -48,12 +47,18 @@ if ( ! function_exists( 'understrap_adjust_body_class' ) ) {
 	 */
 	function understrap_adjust_body_class( $classes ) {
 
+		// Removes tag class from the body_class array to avoid Bootstrap markup styling issues.
 		foreach ( $classes as $key => $value ) {
 			if ( 'tag' == $value ) {
 				unset( $classes[ $key ] );
 			}
 		}
 
+		// Add class indicating primary navbar position. Used by fixed-navbar-css.js.
+		$navbar_position = get_theme_mod( 'understrap_navbar_position' );
+		if ( 'fixed-top' === $navbar_position || 'fixed-bottom' === $navbar_position ) {
+			$classes[] = 'navbar-' . $navbar_position;
+		}
 		return $classes;
 
 	}

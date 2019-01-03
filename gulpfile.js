@@ -136,6 +136,7 @@ gulp.task( 'scripts', function() {
         // End - All BS4 stuff
 
         paths.dev + '/js/skip-link-focus-fix.js',
+        paths.dev + '/js/fixed-navbar-css.js',
 
         // Adding currently empty javascript file to add on for your own themes´ customizations
         // Please add any customizations to this .js file only!
@@ -193,7 +194,7 @@ gulp.task( 'copy-assets', function() {
 
 // Deleting the files distributed by the copy-assets task
 gulp.task( 'clean-vendor-assets', function() {
-  return del( [paths.dev + '/js/bootstrap4/**', paths.dev + '/sass/bootstrap4/**', './fonts/*wesome*.{ttf,woff,woff2,eot,svg}', paths.dev + '/sass/fontawesome/**', paths.dev + '/sass/underscores/**', paths.dev + '/js/skip-link-focus-fix.js', paths.js + '/**/skip-link-focus-fix.js', paths.js + '/**/popper.min.js', paths.js + '/**/popper.js', ( paths.vendor !== ''?( paths.js + paths.vendor + '/**' ):'' )] );
+  return del( [paths.dev + '/js/bootstrap4/**', paths.dev + '/sass/bootstrap4/**', './fonts/*wesome*.{ttf,woff,woff2,eot,svg}', paths.dev + '/sass/fontawesome/**', paths.dev + '/sass/underscores/**', paths.dev + '/js/skip-link-focus-fix.js', paths.js + '/**/skip-link-focus-fix.js', paths.dev + '/js/fixed-navbar-css.js', paths.js + '/**/fixed-navbar-css.js',paths.js + '/**/popper.min.js', paths.js + '/**/popper.js', ( paths.vendor !== ''?( paths.js + paths.vendor + '/**' ):'' )] );
 });
 
 // Run
@@ -204,7 +205,8 @@ gulp.task( 'dist', ['clean-dist'], function() {
   .pipe( replace( '/js/jquery.slim.min.js', '/js' + paths.vendor + '/jquery.slim.min.js', { 'skipBinary': true } ) )
   .pipe( replace( '/js/popper.min.js', '/js' + paths.vendor + '/popper.min.js', { 'skipBinary': true } ) )
   .pipe( replace( '/js/skip-link-focus-fix.js', '/js' + paths.vendor + '/skip-link-focus-fix.js', { 'skipBinary': true } ) )
-    .pipe( gulp.dest( paths.dist ) );
+  .pipe( replace( '/js/fixed-navbar-css.js', '/js' + paths.vendor + '/fixed-navbar-css.js', { 'skipBinary': true } ) )
+  .pipe( gulp.dest( paths.dist ) );
 });
 
 // Deleting any file inside the /dist folder

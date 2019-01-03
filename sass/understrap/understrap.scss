@@ -118,3 +118,10 @@ a.skip-link {
 }
 
 .navbar h1 { font-weight: $font-weight-normal; }
+
+// For fixed navbar
+.skip-link-target-fix {
+	display: block;
+  visibility: hidden;
+  pointer-events: none;
+}

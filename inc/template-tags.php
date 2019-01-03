@@ -130,3 +130,16 @@ if ( ! function_exists ( 'understrap_category_transient_flusher' ) ) {
 		delete_transient( 'understrap_categories' );
 	}
 }
+
+if ( ! function_exists ( 'understrap_navbar_position' ) ) {
+	/**
+	 * Displays the class to place the primary nav.
+	 */
+	function understrap_navbar_position() {
+		$position = get_theme_mod( 'understrap_navbar_position' );
+		if ( 'default' === $position ) {
+			$position = '';
+		}
+		echo esc_attr( apply_filters( 'understrap_navbar_position', $position ) );
+	}
+}
