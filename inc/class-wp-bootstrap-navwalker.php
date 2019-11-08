@@ -77,7 +77,7 @@ if ( ! class_exists( 'Understrap_WP_Bootstrap_Navwalker' ) ) {
 			// with pointer at end of array check if we got an ID match.
 			if ( end( $matches[2] ) ) {
 				// build a string to use as aria-labelledby.
-				$labelledby = 'aria-labelledby="' . end( $matches[2] ) . '"';
+				$labelledby = 'aria-labelledby="' . esc_attr( end( $matches[2] ) ) . '"';
 			}
 			$output .= "{$n}{$indent}<ul$class_names $labelledby role=\"menu\">{$n}";
 		}
