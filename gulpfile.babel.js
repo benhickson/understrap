@@ -45,7 +45,6 @@ export const images = () => {
     .pipe(dest(paths.img));
 }
 
-
 export const copyAssets = (done) => {
   src(paths.node + 'bootstrap/dist/js/**/*.js')
   .pipe(dest(paths.devjs + 'bootstrap4'));
@@ -65,8 +64,8 @@ export const copyAssets = (done) => {
   src(paths.node + 'undescores-for-npm/js/skip-link-focus-fix.js')
   .pipe(dest(paths.devjs));
 
-  src(paths.node + 'popper.js/dist/popper.min.js')
-  .pipe(dest('./js'));
+  src(paths.node + 'popper.js/dist/popper.*js')
+	.pipe(dest(paths.devjs + 'popper'));
 
   done();
 }
@@ -101,7 +100,6 @@ export const dist = (done) => {
       '*'
     ], { 'buffer': false } )
     //.pipe( replace( '/js/jquery.slim.min.js', '/js' + paths.vendor + '/jquery.slim.min.js', { 'skipBinary': true } ) )
-    //.pipe( replace( '/js/popper.min.js', '/js' + paths.vendor + '/popper.min.js', { 'skipBinary': true } ) )
     .pipe( dest( paths.dist ) );
     done();
 }
