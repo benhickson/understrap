@@ -37,7 +37,7 @@
     "autoprefixer": "^9.7.3",
     "babel-loader": "^8.0.4",
     "browser-sync": "^2.26.7",
-    "del": "^3.0.0",
+    "del": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.2.0",
     "gulp-if": "^2.0.2",
