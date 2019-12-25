@@ -14,6 +14,7 @@ import browserSync from "browser-sync";
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const PRODUCTION = yargs.argv.prod;
+const WATCH = yargs.argv.watch;
 const server = browserSync.create();
 
 // Configuration file to keep your code DRY
@@ -145,7 +146,7 @@ export const reload = done => {
   done();
 };
 
-export const dev = series(parallel(styles, images, scripts), serve, watchForChanges);
+export const dev = WATCH ? series(parallel(styles, images, scripts), serve, watchForChanges ) : parallel(styles, images, scripts);
 export const build = series(clean, parallel(styles, images, scripts, dist));
 
 export default dev;
