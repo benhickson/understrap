@@ -57,7 +57,7 @@ export const copyAssets = (done) => {
   .pipe(dest('./fonts'));
 
   src(paths.node + 'font-awesome/scss/*.scss')
-  .pipe(dest(paths.devscss + 'fontawesome'));
+  .pipe(dest(paths.devscss + 'fontawesome4'));
 
   src(paths.node + 'popper.js/dist/popper.*js')
 	.pipe(dest(paths.devjs + 'popper'));
