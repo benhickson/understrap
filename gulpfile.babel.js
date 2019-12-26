@@ -46,6 +46,11 @@ export const images = () => {
     .pipe(dest(paths.img));
 }
 
+export const fonts = () => {
+	return src(paths.devfonts + '**/*.{eot,svg,ttf,woff,woff2}')
+    .pipe(dest(paths.fonts));
+}
+
 export const copyAssets = (done) => {
   src(paths.node + 'bootstrap/dist/js/**/*.js')
   .pipe(dest(paths.devjs + 'bootstrap4'));
@@ -54,7 +59,7 @@ export const copyAssets = (done) => {
   .pipe(dest(paths.devscss + 'bootstrap4'));
 
   src(paths.node + 'font-awesome/fonts/**/*.{ttf,woff,woff2,eot,svg}')
-  .pipe(dest('./fonts'));
+  .pipe(dest(paths.devfonts));
 
   src(paths.node + 'font-awesome/scss/*.scss')
   .pipe(dest(paths.devscss + 'fontawesome4'));
@@ -146,7 +151,7 @@ export const reload = done => {
   done();
 };
 
-export const dev = WATCH ? series(parallel(styles, images, scripts), serve, watchForChanges ) : parallel(styles, images, scripts);
-export const build = series(clean, parallel(styles, images, scripts, dist));
+export const dev = WATCH ? series(parallel(styles, images, scripts, fonts), serve, watchForChanges ) : parallel(styles, images, scripts, fonts);
+export const build = series(clean, parallel(styles, images, scripts, fonts, dist));
 
 export default dev;

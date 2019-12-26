@@ -12,12 +12,14 @@
 		"js": "./js",
 		"css": "./css",
 		"img": "./images",
+		"fonts": "./fonts",
 		"imgsrc": "./src/images/",
 		"node": "./node_modules/",
 		"bower": "./bower_components/",
 		"dev": "./src/",
 		"devscss": "./src/scss/",
 		"devjs": "./src/js/",
+		"devfonts": "./src/fonts/",
 		"dist": "./dist"
 	}
 }
