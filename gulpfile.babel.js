@@ -48,7 +48,7 @@ export const images = () => {
 
 export const fonts = () => {
 	return src(paths.devfonts + '**/*.{eot,svg,ttf,woff,woff2}')
-    .pipe(dest(paths.fonts));
+  	.pipe(dest(paths.fonts));
 }
 
 export const copyAssets = (done) => {
@@ -152,6 +152,6 @@ export const reload = done => {
 };
 
 export const dev = WATCH ? series(parallel(styles, images, scripts, fonts), serve, watchForChanges ) : parallel(styles, images, scripts, fonts);
-export const build = series(clean, parallel(styles, images, scripts, fonts, dist));
+export const build = series(clean, parallel(styles, images, scripts, fonts), dist);
 
 export default dev;
