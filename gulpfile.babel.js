@@ -58,12 +58,6 @@ export const copyAssets = (done) => {
 	src(paths.node + 'bootstrap/scss/**/*.scss')
 		.pipe(dest(paths.devscss + '/bootstrap4'));
 
-	src(paths.node + 'font-awesome/fonts/**/*.{ttf,woff,woff2,eot,svg}')
-		.pipe(dest(paths.devfonts));
-
-	src(paths.node + 'font-awesome/scss/*.scss')
-		.pipe(dest(paths.devscss + '/fontawesome4'));
-
 	src(paths.node + 'popper.js/dist/popper.*js')
 		.pipe(dest(paths.devjs + '/popper'));
 
