@@ -1,6 +1,9 @@
+@import "variables";
+
 // Some basic padding for all wrappers
 .wrapper {
-  padding: $grid-gutter-width 0; }
+	padding: $grid-gutter-width 0;
+}
 
 // Reset hero wrapper padding to 0
 #wrapper-hero { padding: 0px !important; }
@@ -13,11 +16,11 @@
 }
 
 // Separate sticky wrapper from main content
-.wrapper#wrapper-sticky { border-bottom: 1px solid $gray-300; }
+.wrapper#wrapper-sticky { border-bottom: $wrapper-sticky-border-bottom-width solid $wrapper-sticky-border-bottom-color; }
 
 // Adding some contrast background color to footer full widget
-#wrapper-footer-full,
-#wrapper-static-hero { background-color: $gray-200; }
+#wrapper-footer-full { background-color: $footer-full-bg; }
+#wrapper-static-hero { background-color: $static-hero-bg; }
 
 // Necessary WP classes
 .wp-caption { font-size: inherit; }
@@ -27,18 +30,19 @@
 .screen-reader-text { @extend .sr-only; }
 
 .alignleft {
-  display: inline;
   float: left;
-  margin-right: 1.5em;
+  margin-right: $alignleft-margin-right;
 }
 
 .alignright {
-  display: inline;
   float: right;
-  margin-left: 1.5em;
+  margin-left: $alignright-margin-left;
 }
 
-.aligncenter { @extend .mx-auto; }
+.aligncenter, 
+.aligncenter img { 
+	@extend .mx-auto;
+}
 
 .widget_categories,
 .widget_archive {
@@ -56,23 +60,14 @@ article img,
 figure,
 img,
 #secondary img {
-  max-width: 100%;
-  height: auto;
-}
-
-// Skip to content link
-a.skip-link {
-  position: fixed;
-  z-index: 1000;
-  top: 0px;
-  right: 0px;
+  @include img-fluid();
 }
 
 // Reset Jumbotron default margin
-.jumbotron { margin-bottom: 0px; }
+.jumbotron { margin-bottom: $jumbotron-margin-bottom; }
 
 // Dropdown translation
-.navbar-dark .navbar-nav .dropdown-menu .nav-link{
+.navbar-dark .navbar-nav .dropdown-menu .nav-link {
   display: block;
   width: 100%; // For `<button>`s
   padding: $dropdown-item-padding-y $dropdown-item-padding-x;
@@ -124,4 +119,4 @@ a.skip-link {
     }
 }
 
-.navbar h1 { font-weight: $font-weight-normal; }
+.navbar h1 { font-weight: $navbar-h1-font-size; }

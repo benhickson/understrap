@@ -1,12 +1,12 @@
-@import "theme/theme_variables";  // <-------- Add your variables into this file. Also add variables to overwrite Bootstrap or UnderStrap variables here
-@import "bootstrap4";             // <-------- Loads Bootstrap4.
-@import "understrap/understrap";  // <-------- Loads the UnderStrap defaults. Just a few classes to incorporate BS in WP.
+@import "theme/theme_variables";    // <-------- Add your variables into this file. Also add variables to overwrite Bootstrap or UnderStrap variables here
+@import "bootstrap4";               // <-------- Loads Bootstrap4.
+@import "understrap/understrap";    // <-------- Loads the UnderStrap defaults. Just a few classes to incorporate BS in WP.
 
 // Optional files - If you dont use the corresponding scripts/fonts/plugins comment em out.
-@import "fontawesome4";           // <-------- Loads Font Awesome 4 icon font.
-@import "understrap/galleries";   // <-------- Loads Underscores gallery styles.
-@import "understrap/woocommerce"; // <-------- Loads WooCommerce style fixes.
-@import "theme/contact-form7";    // <-------- Loads Contact Form 7 - Bootstrap 4 support
+@import "fontawesome4";             // <-------- Loads Font Awesome 4 icon font.
+@import "understrap/galleries";     // <-------- Loads Underscores gallery styles.
+@import "understrap/woocommerce";   // <-------- Loads WooCommerce style fixes.
+@import "understrap/contact-form7"; // <-------- Loads Contact Form 7 - Bootstrap 4 support
 
 // Any additional imported files
-@import "theme/theme";            // <-------- That's where you can add your own design. Thats your part!
+@import "theme/theme";              // <-------- That's where you can add your own design. Thats your part!
