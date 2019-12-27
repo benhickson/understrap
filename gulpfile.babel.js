@@ -22,7 +22,7 @@ var cfg = require('./gulpconfig.json');
 var paths = cfg.paths;
 
 export const styles = () => {
-	return src([paths.devscss + 'theme.scss', paths.devscss + 'custom-editor-style.scss'])
+	return src([paths.devscss + '/theme.scss', paths.devscss + '/custom-editor-style.scss'])
 		.pipe(sourcemaps.init({ loadMaps: true }))
 		.pipe(gulpif(!PRODUCTION, sourcemaps.init()))
 		.pipe(sass().on('error', sass.logError))
@@ -53,19 +53,19 @@ export const fonts = () => {
 
 export const copyAssets = (done) => {
 	src(paths.node + 'bootstrap/dist/js/**/*.js')
-		.pipe(dest(paths.devjs + 'bootstrap4'));
+		.pipe(dest(paths.devjs + '/bootstrap4'));
 
 	src(paths.node + 'bootstrap/scss/**/*.scss')
-		.pipe(dest(paths.devscss + 'bootstrap4'));
+		.pipe(dest(paths.devscss + '/bootstrap4'));
 
 	src(paths.node + 'font-awesome/fonts/**/*.{ttf,woff,woff2,eot,svg}')
 		.pipe(dest(paths.devfonts));
 
 	src(paths.node + 'font-awesome/scss/*.scss')
-		.pipe(dest(paths.devscss + 'fontawesome4'));
+		.pipe(dest(paths.devscss + '/fontawesome4'));
 
 	src(paths.node + 'popper.js/dist/popper.*js')
-		.pipe(dest(paths.devjs + 'popper'));
+		.pipe(dest(paths.devjs + '/popper'));
 
 	done();
 }
@@ -75,37 +75,25 @@ export const clean = () => del(['dist']);
 export const dist = (done) => {
 	src([
 		'**/*',
-		'!' + paths.bower,
 		'!' + paths.bower + '/**',
-		'!' + paths.node,
 		'!' + paths.node + '/**',
-		'!' + paths.dev,
+		'!' + paths.vendor + '/**',
 		'!' + paths.dev + '/**',
-		'!' + paths.dist,
 		'!' + paths.dist + '/**',
-		'!' + paths.distprod,
-		'!' + paths.distprod + '/**',
-		'!' + paths.sass,
-		'!' + paths.sass + '/**',
-		'!readme.txt',
-		'!readme.md',
-		'!package.json',
-		'!package-lock.json',
-		'!gulpfile.js',
-		'!gulpconfig.json',
-		'!CHANGELOG.md',
-		'!.travis.yml',
-		'!jshintignore',
-		'!codesniffer.ruleset.xml',
-		'*'
-	], { 'buffer': false })
+		'!*.js',
+		'!*.json',
+		'!*.lock',
+		'!*.md',
+		'!*.txt',
+		'!*.xml',
+	], { 'buffer': false, 'dot': false })
 		//.pipe( replace( '/js/jquery.slim.min.js', '/js' + paths.vendor + '/jquery.slim.min.js', { 'skipBinary': true } ) )
 		.pipe(dest(paths.dist));
 	done();
 }
 
 export const scripts = () => {
-	return src([paths.devjs + 'include/*.js', paths.devjs + 'theme.js'])
+	return src([paths.devjs + '/include/*.js', paths.devjs + '/theme.js'])
 		.pipe(webpack({
 			module: {
 				rules: [
