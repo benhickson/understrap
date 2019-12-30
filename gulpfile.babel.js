@@ -25,6 +25,7 @@ export const styles = () => {
 	return src([paths.devscss + '/theme.scss', paths.devscss + '/custom-editor-style.scss'])
 		.pipe(sourcemaps.init({ loadMaps: true }))
 		.pipe(gulpif(!PRODUCTION, sourcemaps.init()))
+		.pipe(sass({includePaths: [paths.devscss, paths.node]}))
 		.pipe(sass().on('error', sass.logError))
 		.pipe(gulpif(PRODUCTION, postcss([autoprefixer])))
 		.pipe(gulpif(PRODUCTION, cleanCss({ compatibility: 'ie8' })))
@@ -34,29 +35,26 @@ export const styles = () => {
 }
 
 export const watchForChanges = () => {
-	watch(paths.devscss + '**/*.scss', styles);
-	watch(paths.imgsrc + '**/*.{jpg,jpeg,png,svg,gif}', series(images, reload));
+	watch(paths.devscss + '/**/*.scss', styles);
+	watch(paths.imgsrc + '/**/*.{jpg,jpeg,png,svg,gif}', series(images, reload));
 	watch('src/js/**/*.js', series(scripts, reload));
 	watch("**/*.php", reload);
 }
 
 export const images = () => {
-	return src(paths.imgsrc + '**/*.{jpg,jpeg,png,svg,gif}')
+	return src(paths.imgsrc + '/**/*.{jpg,jpeg,png,svg,gif}')
 		.pipe(gulpif(PRODUCTION, imagemin()))
 		.pipe(dest(paths.img));
 }
 
 export const fonts = () => {
-	return src(paths.devfonts + '**/*.{eot,svg,ttf,woff,woff2}')
+	return src(paths.devfonts + '/**/*.{eot,svg,ttf,woff,woff2}')
 		.pipe(dest(paths.fonts));
 }
 
 export const copyAssets = (done) => {
 	src(paths.node + 'bootstrap/dist/js/**/*.js')
 		.pipe(dest(paths.devjs + '/bootstrap4'));
-
-	src(paths.node + 'bootstrap/scss/**/*.scss')
-		.pipe(dest(paths.devscss + '/bootstrap4'));
 
 	src(paths.node + 'popper.js/dist/popper.*js')
 		.pipe(dest(paths.devjs + '/popper'));
