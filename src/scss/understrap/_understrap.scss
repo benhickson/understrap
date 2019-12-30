@@ -9,23 +9,20 @@
 #wrapper-hero { padding: 0px !important; }
 
 // Adding basic WordPress classes to pass the WordPress.org tests
-.sticky,
-.gallery-caption,
-.bypostauthor {
-  font-size: inherit;
-}
+.sticky { @include font-size($sticky-font-size); }
+.gallery-caption { @include font-size($gallery-caption-font-size); }
+.bypostauthor { @include font-size($bypostauthor-font-size); }
 
 // Separate sticky wrapper from main content
 .wrapper#wrapper-sticky { border-bottom: $wrapper-sticky-border-bottom-width solid $wrapper-sticky-border-bottom-color; }
 
 // Adding some contrast background color to footer full widget
-#wrapper-footer-full { background-color: $footer-full-bg; }
-#wrapper-static-hero { background-color: $static-hero-bg; }
+#wrapper-footer-full { background-color: $wrapper-footer-full-bg; }
+#wrapper-static-hero { background-color: $wrapper-static-hero-bg; }
 
 // Necessary WP classes
-.wp-caption { font-size: inherit; }
-
-.wp-caption-text { font-size: inherit; }
+.wp-caption { @include font-size($wp-caption-font-size); }
+.wp-caption-text { @include font-size($wp-caption-text-font-size); }
 
 .screen-reader-text { @extend .sr-only; }
 
@@ -81,14 +78,14 @@ img,
 
   @include hover-focus {
     color: $dropdown-link-hover-color !important;
-    text-decoration: none;
+    text-decoration: $navbar-nav-link-text-decoration;
     background-color: $dropdown-link-hover-bg;
-  }
-
+	}
+	
   &.active,
   &:active {
     color: $dropdown-link-active-color !important;
-    text-decoration: none;
+    text-decoration: $navbar-nav-link-text-decoration;
     background-color: $dropdown-link-active-bg;
   }
 
@@ -119,4 +116,4 @@ img,
     }
 }
 
-.navbar h1 { font-weight: $navbar-h1-font-size; }
+.navbar-brand { font-weight: $navbar-brand-font-weight; }

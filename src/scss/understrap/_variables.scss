@@ -1,8 +1,32 @@
-$footer-full-bg:                     $gray-200 !default;
-$static-hero-bg:                     $footer-full-bg !default;
-$alignleft-margin-right:             1.5em !default;
-$alignright-margin-left:             $alignleft-margin-right !default;
-$jumbotron-margin-bottom:            0px !default;
-$navbar-h1-font-size:                $font-weight-normal !default;
+// Wrappers
+
+$wrapper-footer-full-bg:             $gray-200 !default;
+$wrapper-static-hero-bg:             $wrapper-footer-full-bg !default;
 $wrapper-sticky-border-bottom-color: $border-color !default;
 $wrapper-sticky-border-bottom-width: $border-width !default;
+
+
+// Typography
+
+$navbar-brand-font-weight:           $font-weight-normal !default;
+$sticky-font-size:                   inherit !default;
+$gallery-caption-font-size:          inherit !default;
+$bypostauthor-font-size:             inherit !default;
+$wp-caption-font-size:               inherit !default;
+$wp-caption-text-font-size:          inherit !default;
+
+
+// Alignment Classes
+
+$alignleft-margin-right:             1.5em !default;
+$alignright-margin-left:             $alignleft-margin-right !default;
+
+
+// Navbar
+
+$navbar-nav-link-text-decoration:    none !default;
+
+
+// Jumbotron 
+
+$jumbotron-margin-bottom:            0px !default;
