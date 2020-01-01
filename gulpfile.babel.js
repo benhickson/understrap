@@ -26,7 +26,7 @@ export const styles = () => {
 		.pipe(gulpif(!PRODUCTION, sourcemaps.init({ loadMaps: true })))
 		.pipe(sass({includePaths: [paths.devscss, paths.node]}).on('error', sass.logError))
 		.pipe(gulpif(PRODUCTION, postcss([autoprefixer])))
-		.pipe(gulpif(PRODUCTION, cleanCss({ compatibility: 'ie8' })))
+		.pipe(gulpif(PRODUCTION, cleanCss()))
 		.pipe(gulpif(!PRODUCTION, sourcemaps.write()))
 		.pipe(dest(paths.css))
 		.pipe(server.stream());
