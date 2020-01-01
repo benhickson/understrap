@@ -9,9 +9,10 @@ import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 import imagemin from 'gulp-imagemin';
 import del from 'del';
-import webpack from 'webpack-stream';
+import webpack from 'webpack';
 import browserSync from "browser-sync";
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+import path from 'path';
 
 const PRODUCTION = yargs.argv.prod;
 const WATCH = yargs.argv.watch;
@@ -24,7 +25,7 @@ var paths = cfg.paths;
 export const styles = () => {
 	return src([paths.devscss + '/theme.scss', paths.devscss + '/custom-editor-style.scss'])
 		.pipe(gulpif(!PRODUCTION, sourcemaps.init({ loadMaps: true })))
-		.pipe(sass({includePaths: [paths.devscss, paths.node]}).on('error', sass.logError))
+		.pipe(sass({ includePaths: [paths.devscss, paths.node] }).on('error', sass.logError))
 		.pipe(gulpif(PRODUCTION, postcss([autoprefixer])))
 		.pipe(gulpif(PRODUCTION, cleanCss()))
 		.pipe(gulpif(!PRODUCTION, sourcemaps.write()))
@@ -50,16 +51,6 @@ export const fonts = () => {
 		.pipe(dest(paths.fonts));
 }
 
-export const copyAssets = (done) => {
-	src(paths.node + 'bootstrap/dist/js/**/*.js')
-		.pipe(dest(paths.devjs + '/bootstrap4'));
-
-	src(paths.node + 'popper.js/dist/popper.*js')
-		.pipe(dest(paths.devjs + '/popper'));
-
-	done();
-}
-
 export const clean = () => del(['dist']);
 
 export const dist = (done) => {
@@ -83,38 +74,49 @@ export const dist = (done) => {
 }
 
 export const scripts = () => {
-	return src([paths.devjs + '/include/*.js', paths.devjs + '/theme.js'])
-		.pipe(webpack({
-			module: {
-				rules: [
-					{
-						test: /\.js$/,
-						use: {
-							loader: 'babel-loader',
-							options: {
-								presets: []
-							}
-						}
-					}
-				]
-			},
-			mode: PRODUCTION ? 'production' : 'development',
-			devtool: !PRODUCTION ? 'inline-source-map' : false,
-			optimization: {
-				minimize: true,
-				minimizer: [new UglifyJsPlugin({
-					include: /\.js$/
-				})
-				]
-			},
-			output: {
-				filename: 'theme.js'
-			},
-			externals: {
-				jquery: 'jQuery'
-			},
-		}))
-		.pipe(dest(paths.js));
+	const webpackConfig = {
+		entry: {
+			theme: 'multi-entry-loader?include[]=' + paths.devjs + '/theme.js,include[]=' + paths.devjs + '/include/*.js!',
+			customizer: paths.devjs + '/customizer.js'
+		},
+		module: {
+			rules: [
+				{ test: /\.js$/, loader: 'babel-loader'	}
+			]
+		},
+		mode: PRODUCTION ? 'production' : 'development',
+		devtool: !PRODUCTION ? 'inline-source-map' : false,
+		optimization: {
+			minimize: PRODUCTION ? true : false,
+			minimizer: [new TerserPlugin({
+				include: /\.js$/,
+				terserOptions: {
+					ie8: false,
+					safari10: true,
+				}
+			})
+			]
+		},
+		output: {
+			filename: '[name].js',
+			path: path.resolve(__dirname, paths.js),
+		},
+		externals: {
+			jquery: 'jQuery'
+		},
+	}
+
+	return new Promise((resolve, reject) => {
+		webpack(webpackConfig, (err, stats) => {
+				if (err) {
+						return reject(err)
+				}
+				if (stats.hasErrors()) {
+						return reject(new Error(stats.compilation.errors.join('\n')))
+				}
+				resolve()
+		})
+	})
 }
 
 export const serve = done => {
