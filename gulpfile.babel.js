@@ -23,10 +23,8 @@ var paths = cfg.paths;
 
 export const styles = () => {
 	return src([paths.devscss + '/theme.scss', paths.devscss + '/custom-editor-style.scss'])
-		.pipe(sourcemaps.init({ loadMaps: true }))
-		.pipe(gulpif(!PRODUCTION, sourcemaps.init()))
-		.pipe(sass({includePaths: [paths.devscss, paths.node]}))
-		.pipe(sass().on('error', sass.logError))
+		.pipe(gulpif(!PRODUCTION, sourcemaps.init({ loadMaps: true })))
+		.pipe(sass({includePaths: [paths.devscss, paths.node]}).on('error', sass.logError))
 		.pipe(gulpif(PRODUCTION, postcss([autoprefixer])))
 		.pipe(gulpif(PRODUCTION, cleanCss({ compatibility: 'ie8' })))
 		.pipe(gulpif(!PRODUCTION, sourcemaps.write()))
