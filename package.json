@@ -23,7 +23,10 @@
   "bugs": {
     "url": "https://github.com/understrap/understrap/issues"
   },
-  "homepage": "https://understrap.com",
+	"homepage": "https://understrap.com",
+	"engines" : { 
+		"node" : "^10.0 >=12"
+	},
   "dependencies": {
     "bootstrap": "4.4.1",
     "popper.js": "^1.16.0"
